@@ -9,35 +9,37 @@
 /**********************************************************************/
 
 #pragma once
-#include <iostream>
 #include <exception>
+#include <iostream>
 #include <string>
-#define ONLYPRINTFANS(x) std::cerr << x << " LINE: " << __LINE__ << " FILE: " << __FILE__ << std::endl;
+#define ONLYPRINTFANS(x)                                                       \
+  std::cerr << x << " LINE: " << __LINE__ << " FILE: " << __FILE__ << std::endl;
 #define ONLYPRINTNOFANS(x, y, z) std::cout << x << y << z << std::endl;
 
 class Bureaucrat {
 
-private: 
-    const std::string _name;
-    int _grades;
+private:
+  std::string _name;
+  int _grades;
+
 public:
-    Bureaucrat(const std::string name, int grades);
-    ~Bureaucrat();
-    Bureaucrat(const Bureaucrat &copy);
-    Bureaucrat &operator=(const Bureaucrat &rhs);
+  Bureaucrat(const std::string name, int grades);
+  ~Bureaucrat();
+  Bureaucrat(const Bureaucrat &copy);
+  Bureaucrat &operator=(const Bureaucrat &rhs);
 
-    const std::string & getName() const;
-    const int & getGrade() const;
+  const std::string &getName() const;
+  const int &getGrade() const;
 
-    void incrementGrade(int);
-    void decrementGrade(int);
+  void incrementGrade(int);
+  void decrementGrade(int);
 
-    class GradeTooHighException : public std::range_error {
-        public:
-        	GradeTooHighException(const std::string &msg);
-    };
-    class GradeTooLowException : public std::range_error {
-        public:
-        	GradeTooLowException(const std::string &msg);
-    };
+  class GradeTooHighException : public std::range_error {
+  public:
+    GradeTooHighException(const std::string &msg);
+  };
+  class GradeTooLowException : public std::range_error {
+  public:
+    GradeTooLowException(const std::string &msg);
+  };
 };
