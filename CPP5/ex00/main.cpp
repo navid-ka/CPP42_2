@@ -10,6 +10,7 @@
 
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <ostream>
 #include <string>
 
 int main(void) {
@@ -25,7 +26,7 @@ int main(void) {
   }
   // Bureaucra
   Bureaucrat *ceo = new Bureaucrat("Teo", 2);
-
+  std::cout << &((class Bureaucrat *)0)->getName() << std::endl;
   ONLYPRINTFANS(ceo->getName());
   ceo->incrementGrade(1);
   ceo->incrementGrade(1);

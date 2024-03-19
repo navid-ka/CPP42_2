@@ -14,7 +14,7 @@
 #include <stdexcept>
 #include <string>
 
-Bureaucrat::Bureaucrat(std::string name, int grades)
+Bureaucrat::Bureaucrat(const std::string &name, int grades)
     : _name(name), _grades(grades) {
   try {
     if (this->_name.empty())
@@ -50,7 +50,7 @@ const int &Bureaucrat::getGrade() const { return (_grades); }
 
 void Bureaucrat::incrementGrade(int grade) {
   try {
-    this->_grades += grade;
+    this->_grades -= grade;
     isGradeValid(grade);
   } catch (GradeTooHighException &err) {
     ONLYPRINTFANS("Exception thown in " << err.what());
@@ -61,7 +61,7 @@ void Bureaucrat::incrementGrade(int grade) {
 
 void Bureaucrat::decrementGrade(int grade) {
   try {
-    this->_grades -= grade;
+    this->_grades += grade;
     isGradeValid(this->_grades);
   } catch (GradeTooHighException &err) {
     ONLYPRINTFANS("Exception thown in " << err.what());
@@ -73,7 +73,7 @@ void Bureaucrat::decrementGrade(int grade) {
 void Bureaucrat::incrementGrade() {
   try {
 
-    this->_grades++;
+    this->_grades--;
     isGradeValid(this->_grades);
   } catch (GradeTooHighException &err) {
     ONLYPRINTFANS("Exception thown in " << err.what());
@@ -84,7 +84,7 @@ void Bureaucrat::incrementGrade() {
 
 void Bureaucrat::decrementGrade() {
   try {
-    this->_grades--;
+    this->_grades++;
     isGradeValid(this->_grades);
   } catch (GradeTooHighException &err) {
     ONLYPRINTFANS("Exception thown in " << err.what());
