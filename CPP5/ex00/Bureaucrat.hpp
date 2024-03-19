@@ -11,6 +11,7 @@
 #pragma once
 #include <exception>
 #include <iostream>
+#include <ostream>
 #include <string>
 #define ONLYPRINTFANS(x)                                                       \
   std::cerr << x << " LINE: " << __LINE__ << " FILE: " << __FILE__ << std::endl;
@@ -47,3 +48,5 @@ public:
     GradeTooLowException(const std::string &msg);
   };
 };
+
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &rhs);

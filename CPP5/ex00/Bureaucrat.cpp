@@ -10,6 +10,7 @@
 
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 
@@ -105,3 +106,8 @@ Bureaucrat::GradeTooHighException::GradeTooHighException(
 
 Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string &error)
     : std::range_error(error) {}
+
+std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs) {
+  out << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
+  return (out);
+}
