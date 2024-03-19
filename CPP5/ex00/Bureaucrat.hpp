@@ -23,7 +23,7 @@ private:
   int _grades;
 
 public:
-  Bureaucrat(const std::string name, int grades);
+  Bureaucrat(const std::string &name, int grades);
   ~Bureaucrat();
   Bureaucrat(const Bureaucrat &copy);
   Bureaucrat &operator=(const Bureaucrat &rhs);
@@ -32,7 +32,11 @@ public:
   const int &getGrade() const;
 
   void incrementGrade(int);
+  void incrementGrade();
+
   void decrementGrade(int);
+  void decrementGrade();
+  void isGradeValid(int grade);
 
   class GradeTooHighException : public std::range_error {
   public:

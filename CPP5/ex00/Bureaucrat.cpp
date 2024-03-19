@@ -10,16 +10,23 @@
 
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
-Bureaucrat::Bureaucrat(const std::string name, int grades)
+Bureaucrat::Bureaucrat(const std::string &name, int grades)
     : _name(name), _grades(grades) {
   try {
-    std::string err = "Name is empty\n";
     if (this->_name.empty())
-      throw(4);
-  } catch (int err) {
-    ONLYPRINTFANS("Exception thown in " << err);
+      throw std::invalid_argument("name cannot be empty");
+  } catch (std::invalid_argument &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  }
+  try {
+    isGradeValid(_grades);
+  } catch (GradeTooHighException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  } catch (GradeTooLowException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
   }
 }
 
@@ -39,3 +46,62 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs) {
 const std::string &Bureaucrat::getName() const { return (_name); }
 
 const int &Bureaucrat::getGrade() const { return (_grades); }
+
+void Bureaucrat::incrementGrade(int grade) {
+  try {
+    this->_grades += grade;
+    isGradeValid(grade);
+  } catch (GradeTooHighException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  } catch (GradeTooLowException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  }
+}
+
+void Bureaucrat::decrementGrade(int grade) {
+  try {
+    this->_grades -= grade;
+    isGradeValid(this->_grades);
+  } catch (GradeTooHighException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  } catch (GradeTooLowException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  }
+}
+
+void Bureaucrat::incrementGrade() {
+  try {
+
+    this->_grades++;
+    isGradeValid(this->_grades);
+  } catch (GradeTooHighException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  } catch (GradeTooLowException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  }
+}
+
+void Bureaucrat::decrementGrade() {
+  try {
+    this->_grades--;
+    isGradeValid(this->_grades);
+  } catch (GradeTooHighException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  } catch (GradeTooLowException &err) {
+    ONLYPRINTFANS("Exception thown in " << err.what());
+  }
+}
+
+void Bureaucrat::isGradeValid(int grade) {
+  if (grade < 1)
+    throw GradeTooHighException("Grade is too high");
+  if (grade > 150)
+    throw GradeTooLowException("Grade is too low");
+}
+
+Bureaucrat::GradeTooHighException::GradeTooHighException(
+    const std::string &error)
+    : std::range_error(error) {}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string &error)
+    : std::range_error(error) {}

@@ -8,24 +8,32 @@
 /*                              |___/                                 */
 /**********************************************************************/
 
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <string>
-#include "Bureaucrat.hpp"
 
-int main(void)
-{
-    //***TEST TRY CATCH***
-    try {
-        if (1 == 2) {
-            ONLYPRINTNOFANS("True", "", "");
-        } else {
-            throw (404);
-        }
-    } catch (int e) {
-        ONLYPRINTFANS("Exception thown in " << e);
+int main(void) {
+  //***TEST TRY CATCH***
+  try {
+    if (1 == 2) {
+      ONLYPRINTNOFANS("True", "", "");
+    } else {
+      throw(404);
     }
-    //Bureaucrat
+  } catch (int e) {
+    ONLYPRINTFANS("Exception thown in " << e);
+  }
+  // Bureaucra
+  Bureaucrat *ceo = new Bureaucrat("Teo", 2);
 
+  ONLYPRINTFANS(ceo->getName());
+  ceo->incrementGrade(1);
+  ceo->incrementGrade(1);
+  ceo->incrementGrade(1);
+  ONLYPRINTFANS(ceo->getGrade());
+  ceo->decrementGrade(10);
+  ONLYPRINTFANS(ceo->getGrade());
 
-    return (0);
+  delete ceo;
+  return (0);
 }
