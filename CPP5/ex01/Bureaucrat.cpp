@@ -14,7 +14,7 @@
 #include <stdexcept>
 #include <string>
 
-Bureaucrat::Bureaucrat(const std::string &name, int grades)
+Bureaucrat::Bureaucrat(std::string &name, int grades)
     : _name(name), _grades(grades) {
   try {
     if (this->_name.empty())
