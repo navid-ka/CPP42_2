@@ -18,6 +18,8 @@ int main(void) {
   // Bureaucrat
   try {
 		Bureaucrat *ceo = new Bureaucrat("Teo", 2);
+		Form form("permisos", 1, 2);
+
 		ONLYPRINTFANS(ceo->getName());
 		ceo->incrementGrade(1);
 		ceo->incrementGrade(1);
@@ -26,11 +28,13 @@ int main(void) {
 		ceo->decrementGrade(10);
 		ONLYPRINTFANS(ceo->getGrade());
 
+		ceo->signForm(form);
+		
+
 		delete ceo;
   } catch (std::exception &e) {
 		ONLYPRINTFANS(e.what());
  }
  
-
   return (0);
 }

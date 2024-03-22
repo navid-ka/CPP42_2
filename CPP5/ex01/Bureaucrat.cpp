@@ -101,7 +101,18 @@ void Bureaucrat::isGradeValid(int grade) {
     throw GradeTooLowException("Grade is too low");
 }
 
-void Bureaucrat::signForm(const Form &) {}
+void Bureaucrat::signForm(Form &form) {
+  try {
+      form.beSigned(*this);
+      ONLYPRINTNOFANS(_name, " signed ", form.getName());
+  } catch  (std::exception &e)
+  {
+    std::cout << _name << " couldn't sign " << form.getName();
+    std::cout << " because " << e.what();
+    
+  }
+
+}
 
 Bureaucrat::GradeTooHighException::GradeTooHighException(
     const std::string &error)

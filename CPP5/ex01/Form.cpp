@@ -51,23 +51,17 @@ int Form::getGradeSign() const { return (_gradeSign); }
 
 int Form::getGradeReq() const { return (_gradeRequiredExec); }
 
+bool Form::getIsGradeSigned() const { return (_isGradeSigned); }
+
 void Form::beSigned(const Bureaucrat &bure) {
     if (bure.getGrade() >= _gradeSign) {
       _isGradeSigned = true;
     }
     else {
-      throw GradeTooLowException("The grade is not enough to sign the form");
+      throw GradeTooLowException("The grade is not enough to sign the form\n");
     }
 
 }
-
-// Requisitos
-// añadir funcion beSigned() -> Done
-// parametro Bureucrat -> Done
-// Si es mayor o igual entonces OK -> Done
-// Si no excepcion -> Done
-
-
 
 Form::GradeTooHighException::GradeTooHighException(const std::string &error)
     : std::range_error(error) {}
@@ -80,4 +74,12 @@ void Form::isGradeValid(int grade) {
     throw GradeTooHighException("Grade is too high");
   if (grade > 150)
     throw GradeTooLowException("Grade is too low");
+}
+
+std::ostream &operator<<(std::ostream &out, Form const &rhs) {
+  out << rhs.getName() << ", form signing grade " << rhs.getGradeSign() << ", Execution grade " << rhs.getGradeReq() << " is";
+  if (!rhs.getIsGradeSigned())
+    out << " NOT";
+  out << " signed" << std::endl;
+  return (out);
 }

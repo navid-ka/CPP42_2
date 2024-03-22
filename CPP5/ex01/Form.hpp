@@ -33,6 +33,7 @@ public:
   const std::string &getName() const;
   int getGradeSign() const;
   int getGradeReq() const;
+  bool getIsGradeSigned() const;
 
   void beSigned(const Bureaucrat &);
   void isGradeValid(int);

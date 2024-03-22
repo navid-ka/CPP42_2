@@ -43,7 +43,7 @@ public:
   void decrementGrade();
   void isGradeValid(int grade);
 
-  void signForm(const Form &);
+  void signForm(Form &);
   class GradeTooHighException : public std::range_error {
   public:
     GradeTooHighException(const std::string &msg);
