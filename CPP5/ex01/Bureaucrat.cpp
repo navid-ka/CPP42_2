@@ -9,6 +9,7 @@
 /**********************************************************************/
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 #include <ostream>
 #include <stdexcept>
@@ -99,6 +100,8 @@ void Bureaucrat::isGradeValid(int grade) {
   if (grade > 150)
     throw GradeTooLowException("Grade is too low");
 }
+
+void Bureaucrat::signForm(const Form &) {}
 
 Bureaucrat::GradeTooHighException::GradeTooHighException(
     const std::string &error)

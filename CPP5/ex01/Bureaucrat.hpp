@@ -8,14 +8,18 @@
 /*                              |___/                                 */
 /**********************************************************************/
 
-#pragma once
-#include <exception>
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
+
 #include <iostream>
 #include <ostream>
+#include <stdexcept>
 #include <string>
 #define ONLYPRINTFANS(x)                                                       \
   std::cerr << x << " LINE: " << __LINE__ << " FILE: " << __FILE__ << std::endl;
 #define ONLYPRINTNOFANS(x, y, z) std::cout << x << y << z << std::endl;
+
+class Form;
 
 class Bureaucrat {
 
@@ -24,7 +28,7 @@ private:
   int _grades;
 
 public:
-  Bureaucrat(std::string name, int grades);
+  Bureaucrat(const std::string &name, int grades);
   ~Bureaucrat();
   Bureaucrat(const Bureaucrat &copy);
   Bureaucrat &operator=(const Bureaucrat &rhs);
@@ -39,6 +43,7 @@ public:
   void decrementGrade();
   void isGradeValid(int grade);
 
+  void signForm(const Form &);
   class GradeTooHighException : public std::range_error {
   public:
     GradeTooHighException(const std::string &msg);
@@ -50,3 +55,6 @@ public:
 };
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &rhs);
+
+
+#endif // BUREAUCRAT_HPP

@@ -8,11 +8,15 @@
 /*                              |___/                                 */
 /**********************************************************************/
 
-#pragma once
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <iostream>
+#include <stdexcept>
 #include <string>
+#include <ostream>
 
+class Bureaucrat;
 class Form {
 private:
   const std::string _name;
@@ -27,24 +31,22 @@ public:
   Form &operator=(const Form &);
 
   const std::string &getName() const;
+  int getGradeSign() const;
+  int getGradeReq() const;
 
-  const bool isGradeSigned(int) const;
-  const bool isGradeRequiredToExec(int) const;
+  void beSigned(const Bureaucrat &);
+  void isGradeValid(int);
 
-  void beSigned(int);
-  void beExecuted(int);
-
-  class GradeTooHighException : public std::range_error{
+  class GradeTooHighException : public std::range_error {
   public:
     GradeTooHighException(const std::string &error);
   };
-  class GradeTooLowException : public std::range_error{
+  class GradeTooLowException : public std::range_error {
   public:
     GradeTooLowException(const std::string &error);
   };
-  
 };
 
 std::ostream &operator<<(std::ostream &out, const Form &rhs);
 
-std::ostream &operator<<(std::ostream &out, const Form &rhs);
+#endif // FORM_HPP
