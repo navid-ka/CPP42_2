@@ -23,7 +23,7 @@ int main(void) {
 
 		Form		a("A13", 4, 6);
 		Form		b("B97", 146, 135);
-		Form		c("E01", 1, 1);
+		Form		c("E01", 1, 150);
 		// Sign forms
 		std::cout << std::endl;
 		std::cout << "-------SIGN:-------- KO" << std::endl;
