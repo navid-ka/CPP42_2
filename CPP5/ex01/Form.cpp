@@ -54,7 +54,7 @@ int Form::getGradeReq() const { return (_gradeRequiredExec); }
 bool Form::getIsGradeSigned() const { return (_isGradeSigned); }
 
 void Form::beSigned(const Bureaucrat &bure) {
-    if (bure.getGrade() >= _gradeSign) {
+    if (bure.getGrade() <= _gradeSign) {
       _isGradeSigned = true;
     }
     else {
