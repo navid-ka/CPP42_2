@@ -24,9 +24,8 @@ int main(void) {
   } catch (int e) {
     ONLYPRINTFANS("Exception thown in " << e);
   }
-  // Bureaucra
+  // Bureaucrat
   Bureaucrat *ceo = new Bureaucrat("Teo", 2);
-  std::cout << &((class Bureaucrat *)0)->getName() << std::endl;
   ONLYPRINTFANS(ceo->getName());
   ceo->incrementGrade(1);
   ceo->incrementGrade(1);
