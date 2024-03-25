@@ -34,7 +34,7 @@ class AForm {
     int getGradeReq() const;
     bool getIsGradeSigned() const;
 
-    void beSigned(const Bureaucrat &);
+    virtual void beSigned(const Bureaucrat &) = 0;
     void isGradeValid(int);
 
     class GradeTooHighException : public std::range_error {

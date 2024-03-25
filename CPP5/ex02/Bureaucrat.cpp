@@ -9,7 +9,7 @@
 /**********************************************************************/
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iostream>
 #include <ostream>
 #include <stdexcept>
@@ -17,32 +17,32 @@
 
 Bureaucrat::Bureaucrat(const std::string &name, int grades)
     : _name(name), _grades(grades) {
-  try {
-    if (this->_name.empty())
-      throw std::invalid_argument("name cannot be empty");
-  } catch (std::invalid_argument &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  }
-  try {
-    isGradeValid(_grades);
-  } catch (GradeTooHighException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  } catch (GradeTooLowException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  }
+    try {
+        if (this->_name.empty())
+            throw std::invalid_argument("name cannot be empty");
+    } catch (std::invalid_argument &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    }
+    try {
+        isGradeValid(_grades);
+    } catch (GradeTooHighException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    } catch (GradeTooLowException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    }
 }
 
 Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy) {
-  _name = copy.getName();
-  _grades = copy.getGrade();
+    _name = copy.getName();
+    _grades = copy.getGrade();
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs) {
-  this->_name = rhs.getName();
-  this->_grades = rhs.getGrade();
-  return *this;
+    this->_name = rhs.getName();
+    this->_grades = rhs.getGrade();
+    return *this;
 }
 
 const std::string &Bureaucrat::getName() const { return (_name); }
@@ -50,68 +50,65 @@ const std::string &Bureaucrat::getName() const { return (_name); }
 const int &Bureaucrat::getGrade() const { return (_grades); }
 
 void Bureaucrat::incrementGrade(int grade) {
-  try {
-    this->_grades -= grade;
-    isGradeValid(grade);
-  } catch (GradeTooHighException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  } catch (GradeTooLowException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  }
+    try {
+        this->_grades -= grade;
+        isGradeValid(grade);
+    } catch (GradeTooHighException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    } catch (GradeTooLowException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    }
 }
 
 void Bureaucrat::decrementGrade(int grade) {
-  try {
-    this->_grades += grade;
-    isGradeValid(this->_grades);
-  } catch (GradeTooHighException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  } catch (GradeTooLowException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  }
+    try {
+        this->_grades += grade;
+        isGradeValid(this->_grades);
+    } catch (GradeTooHighException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    } catch (GradeTooLowException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    }
 }
 
 void Bureaucrat::incrementGrade() {
-  try {
+    try {
 
-    this->_grades--;
-    isGradeValid(this->_grades);
-  } catch (GradeTooHighException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  } catch (GradeTooLowException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  }
+        this->_grades--;
+        isGradeValid(this->_grades);
+    } catch (GradeTooHighException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    } catch (GradeTooLowException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    }
 }
 
 void Bureaucrat::decrementGrade() {
-  try {
-    this->_grades++;
-    isGradeValid(this->_grades);
-  } catch (GradeTooHighException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  } catch (GradeTooLowException &err) {
-    ONLYPRINTFANS("Exception thown in " << err.what());
-  }
+    try {
+        this->_grades++;
+        isGradeValid(this->_grades);
+    } catch (GradeTooHighException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    } catch (GradeTooLowException &err) {
+        ONLYPRINTFANS("Exception thown in " << err.what());
+    }
 }
 
 void Bureaucrat::isGradeValid(int grade) {
-  if (grade < 1)
-    throw GradeTooHighException("Grade is too high");
-  if (grade > 150)
-    throw GradeTooLowException("Grade is too low");
+    if (grade < 1)
+        throw GradeTooHighException("Grade is too high");
+    if (grade > 150)
+        throw GradeTooLowException("Grade is too low");
 }
 
-void Bureaucrat::signForm(Form &form) {
-  try {
-      form.beSigned(*this);
-      ONLYPRINTNOFANS(_name, " signed ", form.getName());
-  } catch  (std::exception &e)
-  {
-    std::cout << _name << " couldn't sign " << form.getName();
-    std::cout << " because " << e.what();
-    
-  }
-
+void Bureaucrat::signForm(AForm &form) {
+    try {
+        form.beSigned(*this);
+        ONLYPRINTNOFANS(_name, " signed ", form.getName());
+    } catch (std::exception &e) {
+        std::cout << _name << " couldn't sign " << form.getName();
+        std::cout << " because " << e.what();
+    }
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException(
@@ -122,6 +119,7 @@ Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string &error)
     : std::range_error(error) {}
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs) {
-  out << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
-  return (out);
+    out << rhs.getName() << ", bureaucrat grade " << rhs.getGrade()
+        << std::endl;
+    return (out);
 }

@@ -20,7 +20,7 @@
               << std::endl;
 #define ONLYPRINTNOFANS(x, y, z) std::cout << x << y << z << std::endl;
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 
@@ -44,7 +44,8 @@ class Bureaucrat {
     void decrementGrade();
     void isGradeValid(int grade);
 
-    void signForm(Form &);
+    void signForm(AForm &);
+
     class GradeTooHighException : public std::range_error {
       public:
         GradeTooHighException(const std::string &msg);
