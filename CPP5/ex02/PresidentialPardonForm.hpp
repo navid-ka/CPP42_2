@@ -4,6 +4,7 @@
 #include <iostream>
 
 class PresidentialPardonForm : public AForm {
+    std::string _target;
 
   public:
     PresidentialPardonForm(std::string target);

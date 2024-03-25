@@ -22,6 +22,7 @@ class AForm {
     bool _isGradeSigned;
     const int _gradeSign;
     const int _gradeRequiredExec;
+    virtual void executeForm() const = 0;
 
   public:
     AForm(std::string, int, int);
