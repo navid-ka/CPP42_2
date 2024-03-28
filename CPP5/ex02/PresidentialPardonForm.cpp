@@ -2,7 +2,7 @@
 #include "AForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-    : AForm("PresidentialPardonForm", 145, 137) {
+    : AForm("PresidentialPardonForm", 25, 5) {
     _target = target;
 }
 
@@ -21,4 +21,9 @@ PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs) {
         AForm::operator=(rhs);
     }
     return (*this);
+}
+
+void PresidentialPardonForm::executeForm() const {
+    std::cout << _target << "has been pardoned by Zaphod Beeblebrox"
+              << std::endl;
 }

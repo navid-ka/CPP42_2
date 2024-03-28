@@ -1,8 +1,9 @@
+
 #include "RobotomyRequestForm.hpp"
 #include "AForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-    : AForm("RobotomyRequestForm", 145, 137) {
+    : AForm("RobotomyRequestForm", 72, 45) {
     _target = target;
 }
 
@@ -20,4 +21,15 @@ RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs) {
         AForm::operator=(rhs);
     }
     return (*this);
+}
+
+void RobotomyRequestForm::executeForm() const {
+    srand(time(0));
+    int randi = rand();
+
+    if (randi % 50 == 0) {
+        std::cout << _target << " has been robotomized" << std::endl;
+    } else {
+        std::cout << _target << " robotomization failed";
+    }
 }

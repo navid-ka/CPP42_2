@@ -68,11 +68,24 @@ AForm::GradeTooHighException::GradeTooHighException(const std::string &error)
 AForm::GradeTooLowException::GradeTooLowException(const std::string &error)
     : std::range_error(error) {}
 
+AForm::NotSignedException::NotSignedException(const std::string &error)
+    : std::logic_error(error) {}
+
 void AForm::isGradeValid(int grade) {
     if (grade < 1)
         throw GradeTooHighException("Grade is too high");
     if (grade > 150)
         throw GradeTooLowException("Grade is too low");
+}
+
+void AForm::execute(Bureaucrat const &exec) const {
+    (void)exec;
+
+    if (exec.getGrade() > _gradeSign)
+        throw GradeTooLowException("The grade of the executor is too low");
+    if (!this->_isGradeSigned)
+        throw AForm::NotSignedException("Form not signed");
+    executeForm();
 }
 
 std::ostream &operator<<(std::ostream &out, AForm const &rhs) {

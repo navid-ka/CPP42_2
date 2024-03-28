@@ -2,6 +2,8 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 class RobotomyRequestForm : public AForm {
@@ -12,4 +14,6 @@ class RobotomyRequestForm : public AForm {
     ~RobotomyRequestForm();
     RobotomyRequestForm(const RobotomyRequestForm &cpy);
     RobotomyRequestForm &operator=(const RobotomyRequestForm &rhs);
+
+    void executeForm() const;
 };

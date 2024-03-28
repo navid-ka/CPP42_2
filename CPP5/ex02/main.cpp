@@ -8,36 +8,46 @@
 /*                              |___/                                 */
 /**********************************************************************/
 
-#include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <iostream>
 #include <string>
 
 int main(void) {
+
     try {
-        Bureaucrat bob("Bob", 2);
-        Bureaucrat bill("Bill", 132);
+        ShrubberyCreationForm A20("home");
+        ShrubberyCreationForm A22("great");
 
-        // Abstract classes can't be initialized
-        // AForm a("A13", 4, 6);
-        // AForm b("B97", 146, 135);
-        // AForm c("E01", 1, 150);
-        // Sign forms
-        std::cout << std::endl;
-        std::cout << "-------SIGN:-------- KO" << std::endl;
+        Bureaucrat John("John", 40);
 
-        // Sign KO
+        John.executeForm(A20);
+        John.signForm(A20);
+        John.executeForm(A20);
 
-        std::cout << "SIGN KO:" << std::endl;
+        John.signForm(A22);
+        John.executeForm(A22);
 
-        std::cout << "-------SIGN:-------- KO" << std::endl;
-        // Sign OK
-        std::cout << "SIGN OK:" << std::endl;
-        // Sign OK
-        std::cout << "SIGN OK:" << std::endl;
+        std::cout << A20 << std::endl;
+
+        Bureaucrat Paul("Paul", 150);
+
+        Paul.signForm(A20);
+
+        RobotomyRequestForm C54("John");
+
+        John.signForm(C54);
+        John.executeForm(C54);
+
+        std::cout << C54 << std::endl;
+
+        PresidentialPardonForm Z89("John");
+
+        John.signForm(Z89);
+        John.executeForm(Z89);
     } catch (std::exception &err) {
         std::cout << err.what() << std::endl;
     }
-
-    return (0);
 }

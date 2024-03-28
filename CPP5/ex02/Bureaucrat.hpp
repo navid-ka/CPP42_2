@@ -45,7 +45,7 @@ class Bureaucrat {
     void isGradeValid(int grade);
 
     void signForm(AForm &);
-
+    void executeForm(AForm const &form);
     class GradeTooHighException : public std::range_error {
       public:
         GradeTooHighException(const std::string &msg);

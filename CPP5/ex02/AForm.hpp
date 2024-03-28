@@ -22,11 +22,10 @@ class AForm {
     bool _isGradeSigned;
     const int _gradeSign;
     const int _gradeRequiredExec;
-    virtual void executeForm() const = 0;
 
   public:
     AForm(std::string, int, int);
-    ~AForm();
+    virtual ~AForm();
     AForm(const AForm &);
     AForm &operator=(const AForm &);
 
@@ -35,8 +34,11 @@ class AForm {
     int getGradeReq() const;
     bool getIsGradeSigned() const;
 
-    virtual void beSigned(const Bureaucrat &) = 0;
+    void beSigned(const Bureaucrat &);
     void isGradeValid(int);
+
+    virtual void executeForm() const = 0;
+    void execute(Bureaucrat const &executor) const;
 
     class GradeTooHighException : public std::range_error {
       public:
@@ -45,6 +47,10 @@ class AForm {
     class GradeTooLowException : public std::range_error {
       public:
         GradeTooLowException(const std::string &error);
+    };
+    class NotSignedException : public std::logic_error {
+      public:
+        NotSignedException(const std::string &error);
     };
 };
 
